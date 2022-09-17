@@ -1,5 +1,5 @@
 # odin-binary-search-trees
-My OOP implementation of binary search trees with `ruby`. 
+My OOP implementation of a *balanced* binary search tree (BST) with `ruby`. 
 
 ### Background
 * [Wiki](https://en.wikipedia.org/wiki/Binary_search_tree)
