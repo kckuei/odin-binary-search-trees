@@ -1,3 +1,4 @@
+# Node class
 class Node
   attr_accessor :data, :left, :right
 
@@ -9,21 +10,46 @@ class Node
   end
 end
 
+# Tree class
 class Tree
-  def initialize(array)
-    @root = build_tree(array)
+  attr_accessor :root # Temporary attribute accessor, just to inspect objects when printing
+
+  def initialize(array = nil)
+    @root = array.nil? ? nil : build_tree(array, 0, array.length - 1)
   end
 
-  def build_tree(array)
-    # build balanced binary tree full of Node objects
-    # return the level-0 root node
+  # Builds a balanced binary tree full of Node objects
+  # returns the level-0 root node
+  def build_tree(array, start_arr, end_arr)
+    return nil if array.nil? || array.empty?
+    # base case
+    return nil if start_arr > end_arr
+
+    # find the middle index
+    mid = (start_arr + end_arr) / 2
+
+    # make the middle element the root
+    root = Node.new(array[mid])
+
+    # left subtree of root has all values <arr[mid]
+    root.left = build_tree(array, start_arr, mid - 1)
+
+    # right subtree of root has all values >arr[mid]
+    root.right = build_tree(array, mid + 1, end_arr)
+
+    root
   end
 
+  # Inserts a key as a leaf node
   def insert; end
 
   def delete; end
 
-  def find; end
+  def find
+    # Start from the root.
+    # Compare the searching element with root, if less than root, then recursively call left subtree, else recursively call right subtree.
+    # If the element to search is found anywhere, return true, else return false.
+  end
 
   def level_order
     # traverse the tree in breadth-first level order and yield each node to the provided block
@@ -55,11 +81,22 @@ class Tree
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
+    return if @root.nil?
+
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
     puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 end
 
-array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-tree = Tree.new(array)
+def sorted_unique(array)
+  array.uniq.sort
+end
+
+# Do not use duplicate values because they make it more complicated and result in trees that are much harder to balance. Therefore, be sure to always remove duplicate values or check for an existing value before inserting.
+# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
+tree = Tree.new(sorted_unique(array))
+tree.pretty_print
+tree.insert(31)
+tree.pretty_print
