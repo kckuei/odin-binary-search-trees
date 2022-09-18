@@ -1,10 +1,10 @@
 # Node class
 class Node
-  attr_accessor :data, :left, :right
+  attr_accessor :key, :left, :right
 
   include Comparable
-  def initialize(data = nil, left = nil, right = nil)
-    @data = data
+  def initialize(key = nil, left = nil, right = nil)
+    @key = key
     @left = left
     @right = right
   end
@@ -12,7 +12,7 @@ end
 
 # Tree class
 class Tree
-  attr_accessor :root # Temporary attribute accessor, just to inspect objects when printing
+  attr_accessor :root # Temporary attribute accessor for inspect
 
   def initialize(array = nil)
     @root = array.nil? ? nil : build_tree(array, 0, array.length - 1)
@@ -49,7 +49,7 @@ class Tree
     return Node.new(key) if root.nil?
 
     # traverse left or right by comparing key and current node value
-    if key > root.data
+    if key > root.key
       root.right = insert(key, root.right)
     else
       root.left = insert(key, root.left)
@@ -57,7 +57,51 @@ class Tree
     root
   end
 
-  def delete; end
+  # Given non-empty BST, return minimum key value node
+  def min_value_node(node)
+    current = node
+    current = current.left unless current.left.nil?
+    current
+  end
+
+  def delete(key, root = @root)
+    # recursive base case
+    return root if root.nil?
+
+    # If they key to be deleted is smaller than the root's key then it lies in left subtree
+    if key < root.key
+      root.left = delete(key, root.left)
+    # If the key to be deleted is greater than the root's key then it lies in the right subtree
+    elsif key > root.key
+      root.right = delete(key, root.right)
+    # If key is same as root's key, then this is to be deleted
+    else
+      # node has no child
+      if root.left.nil? && root.right.nil?
+        return nil
+      # node with only one child or no child
+      elsif root.left.nil?
+        temp = root.right
+        root = nil
+        return temp
+      elsif root.right.nil?
+        temp = root.left
+        root = nil
+        return temp
+      end
+
+      # Node with two children: get the inorder successor
+      # (smallest in the right subtree)
+      temp = min_value_node(root.right)
+
+      # Copy the inorder successor's content to this node
+      root.key = temp.key
+
+      # Delete the inorder successor
+      root.right = delete(temp.key, root.right)
+    end
+    root
+  end
 
   def find
     # Start from the root.
@@ -98,7 +142,7 @@ class Tree
     return if @root.nil?
 
     pretty_print(node.right, "#{prefix}#{is_left ? '│   ' : '    '}", false) if node.right
-    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.data}"
+    puts "#{prefix}#{is_left ? '└── ' : '┌── '}#{node.key}"
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 end
@@ -121,4 +165,13 @@ tree.pretty_print
 puts "\nBuild new tree (empty), add single node"
 tree = Tree.new
 tree.insert(31)
+tree.pretty_print
+
+puts "\nBuild new tree from sorted array, and delete keys"
+array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
+tree = Tree.new(sorted_unique(array))
+tree.pretty_print
+tree.delete(30)
+tree.pretty_print
+tree.delete(50)
 tree.pretty_print
