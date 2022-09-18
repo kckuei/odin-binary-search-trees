@@ -1,6 +1,10 @@
 # odin-binary-search-trees
 My OOP implementation of a *balanced* binary search tree (BST) with `ruby`. 
 
+**Implementation Limitations**
+* No duplicate values
+* Sorted Arrays
+
 # Binary Search Trees (BSTs)
 * A binary Search Tree is a node-based binary tree data structure which has the following properties:  
   * The left subtree of a node contains only nodes with keys lesser than the node’s key.
@@ -15,7 +19,8 @@ My OOP implementation of a *balanced* binary search tree (BST) with `ruby`.
 * [Binary Tree Traversal](https://www.youtube.com/watch?v=9RHO6jU--GU)
 * [Breadth-first Traversal](https://www.youtube.com/watch?v=86g8jAQug04)
 * [Depth-first Traversal](https://www.youtube.com/watch?v=gm8DUJJhmY4)
-* [Insertion and Deletion 1](https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/?ref=lbp) [Insertion and Deletion 2](https://www.youtube.com/watch?v=wcIRPqTR3Kc)
+* [Insertion and Deletion 1](https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/?ref=lbp) 
+* [Insertion and Deletion 2](https://www.youtube.com/watch?v=wcIRPqTR3Kc)
 
 ### BST Construction Algorithm
 1. Initialize start = 0, end = length of the array - 1

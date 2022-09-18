@@ -41,7 +41,21 @@ class Tree
   end
 
   # Inserts a key as a leaf node
-  def insert; end
+  def insert(key, root = @root)
+    # guard against initial empty tree
+    return @root = Node.new(key) if @root.nil?
+
+    # recursive base case
+    return Node.new(key) if root.nil?
+
+    # traverse left or right by comparing key and current node value
+    if key > root.data
+      root.right = insert(key, root.right)
+    else
+      root.left = insert(key, root.left)
+    end
+    root
+  end
 
   def delete; end
 
@@ -93,10 +107,18 @@ def sorted_unique(array)
   array.uniq.sort
 end
 
-# Do not use duplicate values because they make it more complicated and result in trees that are much harder to balance. Therefore, be sure to always remove duplicate values or check for an existing value before inserting.
-# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
+puts "\nBuild new tree from sorted array"
+array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 tree = Tree.new(sorted_unique(array))
 tree.pretty_print
+
+puts "\nBuild new tree from sorted array, insert key"
+array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
+tree = Tree.new(sorted_unique(array))
+tree.insert(31)
+tree.pretty_print
+
+puts "\nBuild new tree (empty), add single node"
+tree = Tree.new
 tree.insert(31)
 tree.pretty_print
