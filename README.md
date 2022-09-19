@@ -52,7 +52,7 @@ Three cases must be considered:
       * replace the item being deleted with (i)
       * replace (i)'s original position with (i)'s original immediate right subtree
 
-#### Final Implementation in Ruby
+### Final Implementation in Ruby
 ```ruby
 # Node class
 class Node
@@ -317,7 +317,7 @@ def sorted_unique(array)
 end
 ```
 
-### Example Usage
+#### Example Usage
 ```ruby
 puts "\nBuild new tree from sorted array"
 array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
@@ -417,7 +417,7 @@ tree.pretty_print
 puts "Is the tree balanced?: #{tree.balanced?}"
 ```
 
-### Example Output
+#### Example Output
 ```
 
 Build new tree from sorted array
