@@ -21,6 +21,7 @@ My OOP implementation of a *balanced* binary search tree (BST) with `ruby`.
 * [Insertion and Deletion 1](https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/?ref=lbp) 
 * [Insertion and Deletion 2](https://www.youtube.com/watch?v=wcIRPqTR3Kc)
 * [Deletion](https://www.youtube.com/watch?v=gcULXE7ViZw&vl=en)
+* [Height and Maximum Depth](https://www.youtube.com/watch?v=_pnqMz5nrRs)
 
 
 ### BST Construction Algorithm

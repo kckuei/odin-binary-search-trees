@@ -193,12 +193,23 @@ class BinarySearchTree
   end
 
   # Given a node, return its height
-  def height
-    # Height is defined as the number of edges in longest path from a given node to a leaf node.
+  # height = # edges in longest path from root to leaf node
+  def height(node = @root)
+    # guard case, return 0 if empty tree
+    return 0 if @root.nil?
+    # base case
+    # return -1 to account for the edge to nil
+    return -1 if node.nil?
+
+    # recursive case
+    left_height = height(node.left)
+    right_height = height(node.right)
+    [left_height, right_height].max + 1
   end
 
   # Given a node, return its depth
-  def depth
+  # depth = # edges in path from root to that node
+  def depth(node = @root)
     # Depth is defined as the number of edges in path from a given node to the tree’s root node.
   end
 
@@ -279,7 +290,7 @@ puts "\nBuild new tree from sorted array, return postorder"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
 tree.pretty_print
-# tree.postorder { |node| puts node.key }
+tree.postorder { |node| puts node.key }
 postordering = tree.postorder
 p postordering.inject([]) { |acc, node| acc << node.key }
 
@@ -287,6 +298,14 @@ puts "\nBuild new tree from sorted array, return inorder"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
 tree.pretty_print
-# tree.inorder { |node| puts node.key }
+tree.inorder { |node| puts node.key }
 inordering = tree.inorder
 p inordering.inject([]) { |acc, node| acc << node.key }
+
+puts "\nBuild new tree from sorted array, find the height of the tree"
+array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
+tree = BinarySearchTree.new(sorted_unique(array))
+tree.pretty_print
+p "BST Height: #{tree.height}"
+tree = BinarySearchTree.new
+p "Empty Tree Height: #{tree.height}"
