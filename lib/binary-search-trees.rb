@@ -209,14 +209,26 @@ class BinarySearchTree
 
   # Given a node, return its depth
   # depth = # edges in path from root to that node
-  def depth(node = @root)
-    # Depth is defined as the number of edges in path from a given node to the tree’s root node.
+  def depth(key, root = @root)
+    return -1 if root.nil?
+
+    dist = -1
+    return dist + 1 if root.key == key
+
+    dist = depth(key, root.left)
+    return dist + 1 if dist >= 0
+
+    dist = depth(key, root.right)
+    return dist + 1 if dist >= 0
+
+    dist
   end
 
   # Given a BST, check if the tree is balanced
-  def balanced?
-    # A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1.
-  end
+  # A balanced tree is one where the difference
+  # between heights of left subtree and right
+  # subtree of every node is not more than 1.
+  def balanced?; end
 
   # Rebalances an unbalanced tree
   def rebalance
@@ -309,3 +321,11 @@ tree.pretty_print
 p "BST Height: #{tree.height}"
 tree = BinarySearchTree.new
 p "Empty Tree Height: #{tree.height}"
+
+puts "\nBuild new tree from sorted array, find depth of a node"
+array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
+tree = BinarySearchTree.new(sorted_unique(array))
+tree.pretty_print
+puts "Depth of 32 should be 1: #{tree.depth(32)}"
+puts "Depth of 30 be 3: #{tree.depth(30)}"
+puts "Depth of 50 be 0: #{tree.depth(50)}"
