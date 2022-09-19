@@ -66,47 +66,58 @@ class Tree
 
   def delete(key, root = @root)
     # recursive base case
-    return root if root.nil?
-
-    # If they key to be deleted is smaller than the root's key then it lies in left subtree
-    if key < root.key
+    if root.nil?
+      return root
+    # if they key to be deleted is smaller than the root's key then it lies in left subtree
+    elsif key < root.key
       root.left = delete(key, root.left)
-    # If the key to be deleted is greater than the root's key then it lies in the right subtree
+    # if the key to be deleted is greater than the root's key then it lies in the right subtree
     elsif key > root.key
       root.right = delete(key, root.right)
-    # If key is same as root's key, then this is to be deleted
-    else
-      # node has no child
+    # if key is same as root's key, then this is to be deleted
+    elsif key == root.key
+      # case 1: no child
       if root.left.nil? && root.right.nil?
-        return nil
-      # node with only one child or no child
+        root = nil
+      # case 2: one child
       elsif root.left.nil?
-        temp = root.right
-        root = nil
-        return temp
+        root = root.right
       elsif root.right.nil?
-        temp = root.left
-        root = nil
-        return temp
+        root = root.left
+      # case 3: two children
+      else
+        # Node with two children: get the inorder successor
+        # (smallest in the right subtree)
+        temp = min_value_node(root.right)
+
+        # Copy the inorder successor's content to this node
+        root.key = temp.key
+
+        # Delete the inorder successor
+        root.right = delete(temp.key, root.right)
       end
-
-      # Node with two children: get the inorder successor
-      # (smallest in the right subtree)
-      temp = min_value_node(root.right)
-
-      # Copy the inorder successor's content to this node
-      root.key = temp.key
-
-      # Delete the inorder successor
-      root.right = delete(temp.key, root.right)
     end
+
     root
   end
 
-  def find
-    # Start from the root.
-    # Compare the searching element with root, if less than root, then recursively call left subtree, else recursively call right subtree.
-    # If the element to search is found anywhere, return true, else return false.
+  # Start from the root.
+  # Compare the searching element with root, if less than root, then recursively call left subtree, else recursively call right subtree.
+  # If the element to search is found anywhere, return true, else return false.
+  def find(key, root = @root)
+    return false if root.nil?
+
+    return true if key == root.key
+
+    puts " #{key}, #{root.key}"
+
+    if key < root.key
+      find(key, root.left)
+    else
+      find(key, root.right)
+    end
+
+    false
   end
 
   def level_order
@@ -167,7 +178,7 @@ tree = Tree.new
 tree.insert(31)
 tree.pretty_print
 
-puts "\nBuild new tree from sorted array, and delete keys"
+puts "\nBuild new tree from sorted array, and delete keys: 30, 50"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = Tree.new(sorted_unique(array))
 tree.pretty_print
@@ -175,3 +186,12 @@ tree.delete(30)
 tree.pretty_print
 tree.delete(50)
 tree.pretty_print
+
+puts "\nBuild new tree from sorted array, check presence of keys"
+array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
+tree = Tree.new(sorted_unique(array))
+tree.pretty_print
+puts tree.find(50)
+puts tree.find(777)
+puts tree.find(80)
+puts tree.find(85)

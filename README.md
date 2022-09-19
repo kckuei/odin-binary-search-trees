@@ -1,11 +1,10 @@
-# odin-binary-search-trees
+# Binary Search Trees (BSTs)
 My OOP implementation of a *balanced* binary search tree (BST) with `ruby`. 
 
-**Implementation Limitations**
-* No duplicate values
-* Sorted Arrays
+**Limitations**
+* Initial input array must be sorted, with no duplicate values
 
-# Binary Search Trees (BSTs)
+# Background
 * A binary Search Tree is a node-based binary tree data structure which has the following properties:  
   * The left subtree of a node contains only nodes with keys lesser than the node’s key.
   * The right subtree of a node contains only nodes with keys greater than the node’s key.
@@ -13,7 +12,7 @@ My OOP implementation of a *balanced* binary search tree (BST) with `ruby`.
   * There must be no duplicate nodes.
 * The above properties of Binary Search Tree provides an ordering among keys so that the operations like search, minimum and maximum can be done fast. If there is no ordering, then we may have to compare every key to search for a given key.
 
-### References
+### Additional References
 * [Wiki](https://en.wikipedia.org/wiki/Binary_search_tree)
 * [Constructing a BST](https://www.youtube.com/watch?v=VCTP81Ij-EM)
 * [Binary Tree Traversal](https://www.youtube.com/watch?v=9RHO6jU--GU)
