@@ -1,4 +1,4 @@
-# Binary Search Trees (BSTs)
+# Binary Search Trees
 My OOP implementation of a *balanced* binary search tree (BST) using `ruby`. 
 
 **Limitations**
@@ -52,7 +52,7 @@ Three cases must be considered:
       * replace the item being deleted with (i)
       * replace (i)'s original position with (i)'s original immediate right subtree
 
-#### Implementation
+#### Final Implementation in Ruby
 ```ruby
 # Node class
 class Node
