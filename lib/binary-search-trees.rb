@@ -64,6 +64,7 @@ class Tree
     current
   end
 
+  # Given a key and BST root node, deletes the key from the tree
   def delete(key, root = @root)
     # recursive base case
     if root.nil?
@@ -101,23 +102,23 @@ class Tree
     root
   end
 
-  # Start from the root.
-  # Compare the searching element with root, if less than root, then recursively call left subtree, else recursively call right subtree.
-  # If the element to search is found anywhere, return true, else return false.
+  # Given a key, and BST root, checks existence of a key
   def find(key, root = @root)
-    return false if root.nil?
-
-    return true if key == root.key
-
-    puts " #{key}, #{root.key}"
-
-    if key < root.key
+    # recursive base case - nil
+    if root.nil?
+      false
+    # recursive base case - found key
+    elsif key == root.key
+      true
+    # recursive case - the search key is less than the root key,
+    # then the value lies in the left subtree
+    elsif key < root.key
       find(key, root.left)
-    else
+    # recursive case - the search key is less than the root key,
+    # then the value lies in the right subtree
+    elsif key > root.key
       find(key, root.right)
     end
-
-    false
   end
 
   def level_order
@@ -191,7 +192,7 @@ puts "\nBuild new tree from sorted array, check presence of keys"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = Tree.new(sorted_unique(array))
 tree.pretty_print
-puts tree.find(50)
-puts tree.find(777)
-puts tree.find(80)
-puts tree.find(85)
+puts "Value: 50, should return true: #{tree.find(50)}"
+puts "Value: 777, should return false: #{tree.find(777)}"
+puts "Value: 80, should return true: #{tree.find(80)}"
+puts "Value: 85, should return true: #{tree.find(85)}"
