@@ -11,7 +11,7 @@ tree = BinarySearchTree.new(sorted_unique(array))
 tree.insert(31)
 tree.pretty_print
 
-puts "\nBuild new tree (empty), add single node"
+puts "\nBuild new tree (empty), add single key: 31"
 tree = BinarySearchTree.new
 tree.insert(31)
 tree.pretty_print
@@ -25,7 +25,7 @@ tree.pretty_print
 tree.delete(50)
 tree.pretty_print
 
-puts "\nBuild new tree from sorted array, check presence of keys"
+puts "\nBuild new tree from sorted array, check presence of keys: 50, 777, 80, 85"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
 tree.pretty_print
