@@ -1,4 +1,4 @@
-require_relative './binary-search-trees'
+require_relative './binary_search_trees'
 
 puts "\nBuild new tree from sorted array"
 array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]

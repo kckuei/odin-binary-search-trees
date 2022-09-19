@@ -229,7 +229,7 @@ class BinarySearchTree
   end
 
   # Given a BST, check if the tree is balanced
-  # A balanced tree is one where the difference between heights of left 
+  # A balanced tree is one where the difference between heights of left
   # subtree and right subtree of every node is not more than 1.
   def balanced?
     nodes_inorder = inorder(@root)
