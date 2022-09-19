@@ -82,17 +82,6 @@ puts "Depth of 32 should be 1: #{tree.depth(32)}"
 puts "Depth of 30 be 3: #{tree.depth(30)}"
 puts "Depth of 50 be 0: #{tree.depth(50)}"
 
-puts "\nCheck if a tree is balanced"
-tree = BinarySearchTree.new
-tree.insert(4)
-tree.insert(3)
-tree.insert(5)
-tree.insert(2)
-tree.insert(6)
-tree.insert(1)
-tree.insert(7)
-tree.balanced?
-
 puts "\nCreate an unbalanced tree, then rebalance it"
 tree = BinarySearchTree.new
 tree.insert(4)
@@ -103,5 +92,7 @@ tree.insert(6)
 tree.insert(1)
 tree.insert(7)
 tree.pretty_print
+puts "Is the tree balanced?: #{tree.balanced?}"
 tree.rebalance
 tree.pretty_print
+puts "Is the tree balanced?: #{tree.balanced?}"

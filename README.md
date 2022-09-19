@@ -47,7 +47,7 @@ Three cases must be considered:
   * Want look for next biggest of item being deleted
   * Look in right subtree, then find leftmost item, i.e. until no left (i)
     * If (i) has no children
-      * replace the item being deleted with (i)
+      * replace the iteDeleting a node with 2 children:m being deleted with (i)
     * If (i) has children (right subtrees)
       * replace the item being deleted with (i)
       * replace (i)'s original position with (i)'s original immediate right subtree
