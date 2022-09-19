@@ -1,10 +1,10 @@
 # Binary Search Trees (BSTs)
-My OOP implementation of a *balanced* binary search tree (BST) with `ruby`. 
+OOP implementation of a *balanced* binary search tree (BST) using `ruby`. 
 
 **Limitations**
-* Initial input array must be sorted, with no duplicate values
+* Initial input array must be sorted, with no duplicate values.
 
-# Background
+### Background
 * A binary Search Tree is a node-based binary tree data structure which has the following properties:  
   * The left subtree of a node contains only nodes with keys lesser than the node’s key.
   * The right subtree of a node contains only nodes with keys greater than the node’s key.
@@ -12,7 +12,7 @@ My OOP implementation of a *balanced* binary search tree (BST) with `ruby`.
   * There must be no duplicate nodes.
 * The above properties of Binary Search Tree provides an ordering among keys so that the operations like search, minimum and maximum can be done fast. If there is no ordering, then we may have to compare every key to search for a given key.
 
-### Additional References
+### Additional Resources
 * [Wiki](https://en.wikipedia.org/wiki/Binary_search_tree)
 * [Constructing a BST](https://www.youtube.com/watch?v=VCTP81Ij-EM)
 * [Binary Tree Traversal](https://www.youtube.com/watch?v=9RHO6jU--GU)
@@ -23,8 +23,8 @@ My OOP implementation of a *balanced* binary search tree (BST) with `ruby`.
 * [Deletion](https://www.youtube.com/watch?v=gcULXE7ViZw&vl=en)
 * [Height and Maximum Depth](https://www.youtube.com/watch?v=_pnqMz5nrRs)
 
-
-### BST Construction Algorithm
+### Psuedocode Notes
+#### BST Construction Algorithm
 1. Initialize start = 0, end = length of the array - 1
 2. mid = (start + end) / 2
 3. Create a tree node with mid as root (A)
@@ -32,12 +32,12 @@ My OOP implementation of a *balanced* binary search tree (BST) with `ruby`.
   1. Calculate mid of left subarray and make it root of left subtree of A
   2. Calculate mid of right subarray and make it root of right subtree of A
 
-### Insertion
+#### Insertion
 * The insertion item is always inserted into a BST as a leaf
 * Begin at the root, and directed to left or right base on if the value is less than or greater than current node, respectively
 * Traverse until we find a node that can accomodate the insertion of the item
 
-### Deletion
+#### Deletion
 * Three cases must be considered
 1. Leaf: 
   * Can delete without changing structure of tree (delete child)
