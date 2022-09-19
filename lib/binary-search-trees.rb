@@ -122,9 +122,11 @@ class BinarySearchTree
   end
 
   # Traverse the tree in breadth-first level order and yields each node to the provided block
+  # Returns array unless block given
   def level_order(root = @root, &block)
     return if root.nil?
 
+    array = []
     queue = []
     queue.push(root)
 
@@ -132,18 +134,23 @@ class BinarySearchTree
     until queue.empty?
       node = queue.shift
       block.call(node) if block_given? && !node.nil?
+      array.push(node)
       queue.push(node.left) unless node.left.nil?
       queue.push(node.right) unless node.right.nil?
     end
+    array unless block_given?
   end
 
-  def level_order_r(queue = [@root], &block); end
-
-  # methods that accepts a block. Each method should traverse the tree in their respective depth-first order and yield each node to the provided block. The methods should return an array of values if no block is given.
+  # Traverse the three in depth-first order (inorder) and yield each node to given block
+  # Returns an array if no block given
   def inorder; end
 
-  def preorder; end
+  # Traverse the three in depth-first order (preorder) and yield each node to given block
+  # Returns an array if no block given
 
+  def preorder; end
+  # Traverse the three in depth-first order (postorder) and yield each node to given block
+  # Returns an array if no block given
   def postorder; end
 
   # Given a node, return its height
@@ -213,8 +220,10 @@ puts "Value: 777, should return false: #{tree.find(777)}"
 puts "Value: 80, should return true: #{tree.find(80)}"
 puts "Value: 85, should return true: #{tree.find(85)}"
 
-puts "\nBuild new tree from sorted array, pass a block to level_order"
+puts "\nBuild new tree from sorted array, level_order accepts block, or returns array if no block passed"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
 tree.pretty_print
-tree.level_order { |node| node.key }
+tree.level_order { |node| puts node.key }
+level_ordering = tree.level_order
+p level_ordering.inject([]) { |acc, node| acc << node.key }
