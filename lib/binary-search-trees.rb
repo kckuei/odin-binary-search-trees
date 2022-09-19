@@ -210,9 +210,13 @@ class BinarySearchTree
   # Given a node, return its depth
   # depth = # edges in path from root to that node
   def depth(key, root = @root)
+    # base case
     return -1 if root.nil?
 
+    # initialize distance as -1
     dist = -1
+
+    # check if key is current node
     return dist + 1 if root.key == key
 
     dist = depth(key, root.left)
@@ -231,8 +235,11 @@ class BinarySearchTree
   def balanced?; end
 
   # Rebalances an unbalanced tree
+  # rebuilds the tree using inorder traversal to recover the sorted array
   def rebalance
-    # Tip: You’ll want to use a traversal method to provide a new array to the #build_tree method.
+    nodes_inorder = inorder(@root)
+    keys = nodes_inorder.inject([]) { |acc, node| acc << node.key }
+    @root = build_tree(keys, 0, keys.length - 1)
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
@@ -329,3 +336,16 @@ tree.pretty_print
 puts "Depth of 32 should be 1: #{tree.depth(32)}"
 puts "Depth of 30 be 3: #{tree.depth(30)}"
 puts "Depth of 50 be 0: #{tree.depth(50)}"
+
+puts "\nCreate an unbalanced tree, then rebalance it"
+tree = BinarySearchTree.new
+tree.insert(4)
+tree.insert(3)
+tree.insert(5)
+tree.insert(2)
+tree.insert(6)
+tree.insert(1)
+tree.insert(7)
+tree.pretty_print
+tree.rebalance
+tree.pretty_print
