@@ -10,8 +10,8 @@ class Node
   end
 end
 
-# Tree class
-class Tree
+# Binary Search Tree class
+class BinarySearchTree
   attr_accessor :root # Temporary attribute accessor for inspect
 
   def initialize(array = nil)
@@ -121,11 +121,23 @@ class Tree
     end
   end
 
-  def level_order
-    # traverse the tree in breadth-first level order and yield each node to the provided block
-    # method can be implemented using either iteration or recursion
-    # Tip: You will want to use an array acting as a queue to keep track of all the child nodes that you have yet to traverse and to add new ones to the list (as you saw in the video).
+  # Traverse the tree in breadth-first level order and yields each node to the provided block
+  def level_order(root = @root, &block)
+    return if root.nil?
+
+    queue = []
+    queue.push(root)
+
+    # while there is at least one discovered node
+    until queue.empty?
+      node = queue.shift
+      block.call(node) if block_given? && !node.nil?
+      queue.push(node.left) unless node.left.nil?
+      queue.push(node.right) unless node.right.nil?
+    end
   end
+
+  def level_order_r(queue = [@root], &block); end
 
   # methods that accepts a block. Each method should traverse the tree in their respective depth-first order and yield each node to the provided block. The methods should return an array of values if no block is given.
   def inorder; end
@@ -134,20 +146,24 @@ class Tree
 
   def postorder; end
 
+  # Given a node, return its height
   def height
-    Write a # height method which accepts a node and returns its height. Height is defined as the number of edges in longest path from a given node to a leaf node.
+    # Height is defined as the number of edges in longest path from a given node to a leaf node.
   end
 
+  # Given a node, return its depth
   def depth
-    Write a # depth method which accepts a node and returns its depth. Depth is defined as the number of edges in path from a given node to the tree’s root node.
+    # Depth is defined as the number of edges in path from a given node to the tree’s root node.
   end
 
+  # Given a BST, check if the tree is balanced
   def balanced?
-    Write a # balanced? method which checks if the tree is balanced. A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1.
+    # A balanced tree is one where the difference between heights of left subtree and right subtree of every node is not more than 1.
   end
 
+  # Rebalances an unbalanced tree
   def rebalance
-    # Write a #rebalance method which rebalances an unbalanced tree. Tip: You’ll want to use a traversal method to provide a new array to the #build_tree method.
+    # Tip: You’ll want to use a traversal method to provide a new array to the #build_tree method.
   end
 
   def pretty_print(node = @root, prefix = '', is_left = true)
@@ -165,23 +181,23 @@ end
 
 puts "\nBuild new tree from sorted array"
 array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
-tree = Tree.new(sorted_unique(array))
+tree = BinarySearchTree.new(sorted_unique(array))
 tree.pretty_print
 
 puts "\nBuild new tree from sorted array, insert key"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
-tree = Tree.new(sorted_unique(array))
+tree = BinarySearchTree.new(sorted_unique(array))
 tree.insert(31)
 tree.pretty_print
 
 puts "\nBuild new tree (empty), add single node"
-tree = Tree.new
+tree = BinarySearchTree.new
 tree.insert(31)
 tree.pretty_print
 
 puts "\nBuild new tree from sorted array, and delete keys: 30, 50"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
-tree = Tree.new(sorted_unique(array))
+tree = BinarySearchTree.new(sorted_unique(array))
 tree.pretty_print
 tree.delete(30)
 tree.pretty_print
@@ -190,9 +206,15 @@ tree.pretty_print
 
 puts "\nBuild new tree from sorted array, check presence of keys"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
-tree = Tree.new(sorted_unique(array))
+tree = BinarySearchTree.new(sorted_unique(array))
 tree.pretty_print
 puts "Value: 50, should return true: #{tree.find(50)}"
 puts "Value: 777, should return false: #{tree.find(777)}"
 puts "Value: 80, should return true: #{tree.find(80)}"
 puts "Value: 85, should return true: #{tree.find(85)}"
+
+puts "\nBuild new tree from sorted array, pass a block to level_order"
+array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
+tree = BinarySearchTree.new(sorted_unique(array))
+tree.pretty_print
+tree.level_order { |node| node.key }

@@ -20,6 +20,8 @@ My OOP implementation of a *balanced* binary search tree (BST) with `ruby`.
 * [Depth-first Traversal](https://www.youtube.com/watch?v=gm8DUJJhmY4)
 * [Insertion and Deletion 1](https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/?ref=lbp) 
 * [Insertion and Deletion 2](https://www.youtube.com/watch?v=wcIRPqTR3Kc)
+* [Deletion](https://www.youtube.com/watch?v=gcULXE7ViZw&vl=en)
+
 
 ### BST Construction Algorithm
 1. Initialize start = 0, end = length of the array - 1
