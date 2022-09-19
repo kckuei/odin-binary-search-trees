@@ -1,5 +1,5 @@
 # Binary Search Trees (BSTs)
-OOP implementation of a *balanced* binary search tree (BST) using `ruby`. 
+My OOP implementation of a *balanced* binary search tree (BST) using `ruby`. 
 
 **Limitations**
 * Initial input array must be sorted, with no duplicate values.
@@ -38,12 +38,12 @@ OOP implementation of a *balanced* binary search tree (BST) using `ruby`.
 * Traverse until we find a node that can accomodate the insertion of the item
 
 #### Deletion
-* Three cases must be considered
-1. Leaf: 
+Three cases must be considered:
+1. No children (leaf)
   * Can delete without changing structure of tree (delete child)
-2. Deleting node with 1 child:
+2. One child
   * Point the parent to it's child child
-3. Deleting a node with 2 children:
+3. Two children
   * Want look for next biggest of item being deleted
   * Look in right subtree, then find leftmost item, i.e. until no left (i)
     * If (i) has no children

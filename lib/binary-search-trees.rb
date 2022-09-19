@@ -233,7 +233,8 @@ class BinarySearchTree
   # between heights of left subtree and right
   # subtree of every node is not more than 1.
   def balanced?
-
+    # use the height function to recursively check the
+    # differnece between left and right subtrees for each node
   end
 
   # Rebalances an unbalanced tree
