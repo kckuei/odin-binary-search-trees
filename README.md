@@ -317,24 +317,71 @@ def sorted_unique(array)
 end
 ```
 
-#### Example Usage
+
+
+
+### Example Usage
 ```ruby
 puts "\nBuild new tree from sorted array"
 array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 tree = BinarySearchTree.new(sorted_unique(array))
 tree.pretty_print
+```
 
+```
+Build new tree from sorted array
+│           ┌── 6345
+│       ┌── 324
+│   ┌── 67
+│   │   │   ┌── 23
+│   │   └── 9
+└── 8
+    │       ┌── 7
+    │   ┌── 5
+    └── 4
+        │   ┌── 3
+        └── 1
+```
+
+```ruby
 puts "\nBuild new tree from sorted array, insert key"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
 tree.insert(31)
 tree.pretty_print
+```
 
+```
+Build new tree from sorted array, insert key
+│           ┌── 85
+│       ┌── 80
+│       │   └── 75
+│   ┌── 70
+│   │   │   ┌── 65
+│   │   └── 60
+└── 50
+    │       ┌── 40
+    │   ┌── 36
+    │   │   └── 34
+    └── 32
+        │       ┌── 31
+        │   ┌── 30
+        └── 20
+```
+
+```ruby
 puts "\nBuild new tree (empty), add single node"
 tree = BinarySearchTree.new
 tree.insert(31)
 tree.pretty_print
+```
 
+```
+Build new tree (empty), add single node
+└── 31
+```
+
+```ruby
 puts "\nBuild new tree from sorted array, and delete keys: 30, 50"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
@@ -343,7 +390,50 @@ tree.delete(30)
 tree.pretty_print
 tree.delete(50)
 tree.pretty_print
+```
 
+```
+
+Build new tree from sorted array, and delete keys: 30, 50
+│           ┌── 85
+│       ┌── 80
+│       │   └── 75
+│   ┌── 70
+│   │   │   ┌── 65
+│   │   └── 60
+└── 50
+    │       ┌── 40
+    │   ┌── 36
+    │   │   └── 34
+    └── 32
+        │   ┌── 30
+        └── 20
+│           ┌── 85
+│       ┌── 80
+│       │   └── 75
+│   ┌── 70
+│   │   │   ┌── 65
+│   │   └── 60
+└── 50
+    │       ┌── 40
+    │   ┌── 36
+    │   │   └── 34
+    └── 32
+        └── 20
+│           ┌── 85
+│       ┌── 80
+│       │   └── 75
+│   ┌── 70
+│   │   └── 65
+└── 60
+    │       ┌── 40
+    │   ┌── 36
+    │   │   └── 34
+    └── 32
+        └── 20
+```
+
+```ruby
 puts "\nBuild new tree from sorted array, check presence of keys"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
@@ -352,7 +442,30 @@ puts "Value: 50, should return true: #{tree.find(50)}"
 puts "Value: 777, should return false: #{tree.find(777)}"
 puts "Value: 80, should return true: #{tree.find(80)}"
 puts "Value: 85, should return true: #{tree.find(85)}"
+```
 
+```
+Build new tree from sorted array, check presence of keys
+│           ┌── 85
+│       ┌── 80
+│       │   └── 75
+│   ┌── 70
+│   │   │   ┌── 65
+│   │   └── 60
+└── 50
+    │       ┌── 40
+    │   ┌── 36
+    │   │   └── 34
+    └── 32
+        │   ┌── 30
+        └── 20
+Value: 50, should return true: true
+Value: 777, should return false: false
+Value: 80, should return true: true
+Value: 85, should return true: true
+```
+
+```ruby
 puts "\nBuild new tree from sorted array, level_order accepts block, or returns array if no block passed"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
@@ -360,7 +473,40 @@ tree.pretty_print
 tree.level_order { |node| puts node.key }
 level_ordering = tree.level_order
 p level_ordering.inject([]) { |acc, node| acc << node.key }
+```
 
+```
+Build new tree from sorted array, level_order accepts block, or returns array if no block passed
+│           ┌── 85
+│       ┌── 80
+│       │   └── 75
+│   ┌── 70
+│   │   │   ┌── 65
+│   │   └── 60
+└── 50
+    │       ┌── 40
+    │   ┌── 36
+    │   │   └── 34
+    └── 32
+        │   ┌── 30
+        └── 20
+50
+32
+70
+20
+36
+60
+80
+30
+34
+40
+65
+75
+85
+[50, 32, 70, 20, 36, 60, 80, 30, 34, 40, 65, 75, 85]
+```
+
+```ruby
 puts "\nBuild new tree from sorted array, return preorder"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
@@ -368,7 +514,40 @@ tree.pretty_print
 tree.preorder { |node| puts node.key }
 preordering = tree.preorder
 p preordering.inject([]) { |acc, node| acc << node.key }
+```
 
+```
+Build new tree from sorted array, return preorder
+│           ┌── 85
+│       ┌── 80
+│       │   └── 75
+│   ┌── 70
+│   │   │   ┌── 65
+│   │   └── 60
+└── 50
+    │       ┌── 40
+    │   ┌── 36
+    │   │   └── 34
+    └── 32
+        │   ┌── 30
+        └── 20
+50
+32
+20
+30
+36
+34
+40
+70
+60
+65
+80
+75
+85
+[50, 32, 20, 30, 36, 34, 40, 70, 60, 65, 80, 75, 85]
+```
+
+```ruby
 puts "\nBuild new tree from sorted array, return postorder"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
@@ -376,7 +555,40 @@ tree.pretty_print
 tree.postorder { |node| puts node.key }
 postordering = tree.postorder
 p postordering.inject([]) { |acc, node| acc << node.key }
+```
 
+```
+Build new tree from sorted array, return postorder
+│           ┌── 85
+│       ┌── 80
+│       │   └── 75
+│   ┌── 70
+│   │   │   ┌── 65
+│   │   └── 60
+└── 50
+    │       ┌── 40
+    │   ┌── 36
+    │   │   └── 34
+    └── 32
+        │   ┌── 30
+        └── 20
+30
+20
+34
+40
+36
+32
+65
+60
+75
+85
+80
+70
+50
+[30, 20, 34, 40, 36, 32, 65, 60, 75, 85, 80, 70, 50]
+```
+
+```ruby
 puts "\nBuild new tree from sorted array, return inorder"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
@@ -384,7 +596,40 @@ tree.pretty_print
 tree.inorder { |node| puts node.key }
 inordering = tree.inorder
 p inordering.inject([]) { |acc, node| acc << node.key }
+```
 
+```
+Build new tree from sorted array, return inorder
+│           ┌── 85
+│       ┌── 80
+│       │   └── 75
+│   ┌── 70
+│   │   │   ┌── 65
+│   │   └── 60
+└── 50
+    │       ┌── 40
+    │   ┌── 36
+    │   │   └── 34
+    └── 32
+        │   ┌── 30
+        └── 20
+20
+30
+32
+34
+36
+40
+50
+60
+65
+70
+75
+80
+85
+[20, 30, 32, 34, 36, 40, 50, 60, 65, 70, 75, 80, 85]
+```
+
+```ruby
 puts "\nBuild new tree from sorted array, find the height of the tree"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
@@ -392,7 +637,28 @@ tree.pretty_print
 p "BST Height: #{tree.height}"
 tree = BinarySearchTree.new
 p "Empty Tree Height: #{tree.height}"
+```
 
+```
+Build new tree from sorted array, find the height of the tree
+│           ┌── 85
+│       ┌── 80
+│       │   └── 75
+│   ┌── 70
+│   │   │   ┌── 65
+│   │   └── 60
+└── 50
+    │       ┌── 40
+    │   ┌── 36
+    │   │   └── 34
+    └── 32
+        │   ┌── 30
+        └── 20
+"BST Height: 3"
+"Empty Tree Height: 0"
+```
+
+```ruby
 puts "\nBuild new tree from sorted array, find depth of a node"
 array = [20, 30, 50, 40, 32, 34, 36, 70, 60, 65, 75, 80, 85]
 tree = BinarySearchTree.new(sorted_unique(array))
@@ -400,7 +666,29 @@ tree.pretty_print
 puts "Depth of 32 should be 1: #{tree.depth(32)}"
 puts "Depth of 30 be 3: #{tree.depth(30)}"
 puts "Depth of 50 be 0: #{tree.depth(50)}"
+```
 
+```
+Build new tree from sorted array, find depth of a node
+│           ┌── 85
+│       ┌── 80
+│       │   └── 75
+│   ┌── 70
+│   │   │   ┌── 65
+│   │   └── 60
+└── 50
+    │       ┌── 40
+    │   ┌── 36
+    │   │   └── 34
+    └── 32
+        │   ┌── 30
+        └── 20
+Depth of 32 should be 1: 1
+Depth of 30 be 3: 3
+Depth of 50 be 0: 0
+```
+
+```ruby
 puts "\nCreate an unbalanced tree, then rebalance it"
 tree = BinarySearchTree.new
 tree.insert(4)
@@ -417,249 +705,7 @@ tree.pretty_print
 puts "Is the tree balanced?: #{tree.balanced?}"
 ```
 
-#### Example Output
 ```
-
-Build new tree from sorted array
-│           ┌── 6345
-│       ┌── 324
-│   ┌── 67
-│   │   │   ┌── 23
-│   │   └── 9
-└── 8
-    │       ┌── 7
-    │   ┌── 5
-    └── 4
-        │   ┌── 3
-        └── 1
-
-Build new tree from sorted array, insert key
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │       ┌── 31
-        │   ┌── 30
-        └── 20
-
-Build new tree (empty), add single node
-└── 31
-
-Build new tree from sorted array, and delete keys: 30, 50
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        └── 20
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   └── 65
-└── 60
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        └── 20
-
-Build new tree from sorted array, check presence of keys
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-Value: 50, should return true: true
-Value: 777, should return false: false
-Value: 80, should return true: true
-Value: 85, should return true: true
-
-Build new tree from sorted array, level_order accepts block, or returns array if no block passed
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-50
-32
-70
-20
-36
-60
-80
-30
-34
-40
-65
-75
-85
-[50, 32, 70, 20, 36, 60, 80, 30, 34, 40, 65, 75, 85]
-
-Build new tree from sorted array, return preorder
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-50
-32
-20
-30
-36
-34
-40
-70
-60
-65
-80
-75
-85
-[50, 32, 20, 30, 36, 34, 40, 70, 60, 65, 80, 75, 85]
-
-Build new tree from sorted array, return postorder
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-30
-20
-34
-40
-36
-32
-65
-60
-75
-85
-80
-70
-50
-[30, 20, 34, 40, 36, 32, 65, 60, 75, 85, 80, 70, 50]
-
-Build new tree from sorted array, return inorder
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-20
-30
-32
-34
-36
-40
-50
-60
-65
-70
-75
-80
-85
-[20, 30, 32, 34, 36, 40, 50, 60, 65, 70, 75, 80, 85]
-
-Build new tree from sorted array, find the height of the tree
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-"BST Height: 3"
-"Empty Tree Height: 0"
-
-Build new tree from sorted array, find depth of a node
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-Depth of 32 should be 1: 1
-Depth of 30 be 3: 3
-Depth of 50 be 0: 0
-
 Create an unbalanced tree, then rebalance it
 │           ┌── 7
 │       ┌── 6
@@ -669,265 +715,6 @@ Create an unbalanced tree, then rebalance it
         └── 2
             └── 1
 Is the tree imbalanced?: false
-│       ┌── 7
-│   ┌── 6
-│   │   └── 5
-└── 4
-    │   ┌── 3
-    └── 2
-        └── 1
-Is the tree imbalanced?: true
-(base) kckuei@kckuei-Precision-3560:~/Desktop/repos/odin-binary-search-trees$ ruby lib/tests.rb 
-
-Build new tree from sorted array
-│           ┌── 6345
-│       ┌── 324
-│   ┌── 67
-│   │   │   ┌── 23
-│   │   └── 9
-└── 8
-    │       ┌── 7
-    │   ┌── 5
-    └── 4
-        │   ┌── 3
-        └── 1
-
-Build new tree from sorted array, insert key
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │       ┌── 31
-        │   ┌── 30
-        └── 20
-
-Build new tree (empty), add single node
-└── 31
-
-Build new tree from sorted array, and delete keys: 30, 50
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        └── 20
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   └── 65
-└── 60
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        └── 20
-
-Build new tree from sorted array, check presence of keys
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-Value: 50, should return true: true
-Value: 777, should return false: false
-Value: 80, should return true: true
-Value: 85, should return true: true
-
-Build new tree from sorted array, level_order accepts block, or returns array if no block passed
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-50
-32
-70
-20
-36
-60
-80
-30
-34
-40
-65
-75
-85
-[50, 32, 70, 20, 36, 60, 80, 30, 34, 40, 65, 75, 85]
-
-Build new tree from sorted array, return preorder
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-50
-32
-20
-30
-36
-34
-40
-70
-60
-65
-80
-75
-85
-[50, 32, 20, 30, 36, 34, 40, 70, 60, 65, 80, 75, 85]
-
-Build new tree from sorted array, return postorder
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-30
-20
-34
-40
-36
-32
-65
-60
-75
-85
-80
-70
-50
-[30, 20, 34, 40, 36, 32, 65, 60, 75, 85, 80, 70, 50]
-
-Build new tree from sorted array, return inorder
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-20
-30
-32
-34
-36
-40
-50
-60
-65
-70
-75
-80
-85
-[20, 30, 32, 34, 36, 40, 50, 60, 65, 70, 75, 80, 85]
-
-Build new tree from sorted array, find the height of the tree
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-"BST Height: 3"
-"Empty Tree Height: 0"
-
-Build new tree from sorted array, find depth of a node
-│           ┌── 85
-│       ┌── 80
-│       │   └── 75
-│   ┌── 70
-│   │   │   ┌── 65
-│   │   └── 60
-└── 50
-    │       ┌── 40
-    │   ┌── 36
-    │   │   └── 34
-    └── 32
-        │   ┌── 30
-        └── 20
-Depth of 32 should be 1: 1
-Depth of 30 be 3: 3
-Depth of 50 be 0: 0
-
-Create an unbalanced tree, then rebalance it
-│           ┌── 7
-│       ┌── 6
-│   ┌── 5
-└── 4
-    └── 3
-        └── 2
-            └── 1
-Is the tree balanced?: false
 │       ┌── 7
 │   ┌── 6
 │   │   └── 5
